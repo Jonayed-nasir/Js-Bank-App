@@ -16,4 +16,33 @@
         return;
       }
 
+      let message = '';
+      if (action === 'add') {
+        balance += amount;
+        message = `✅ Added ৳${amount}`;
+      } else if (action === 'send') {
+        if (amount > balance) {
+          alert("❌ Not enough balance.");
+          return;
+        }
+        balance -= amount;
+        message = `📤 Sent ৳${amount}`;
+      } else if (action === 'withdraw') {
+        if (amount > balance) {
+          alert("❌ Not enough balance.");
+          return;
+        }
+        balance -= amount;
+        message = `📥 Withdrawn ৳${amount}`;
+      }
+
+      balanceDisplay.innerText = balance;
+      const li = document.createElement('li');
+      li.innerText = message;
+      li.className = "bg-white p-2 rounded shadow text-gray-700";
+      history.prepend(li);
+
+      document.getElementById('amountInput').value = '';
+      document.getElementById('formSection').classList.add('hidden');
+      
     }
